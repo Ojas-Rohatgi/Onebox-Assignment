@@ -87,7 +87,7 @@ export class ImapService {
   private fetchInitialEmails(): void {
     const thirtyDaysAgo = new Date();
     // Set to -30 to fetch last 30 days
-    thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 1);
+    thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
 
     const searchDate = thirtyDaysAgo.toISOString().split('T')[0];
 
