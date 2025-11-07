@@ -1,0 +1,26 @@
+# This file configures and launches the local Elasticsearch v8.11.1 database.
+# Run with: docker-compose up
+version: '3.8'
+
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.11.1
+    container_name: elasticsearch
+    environment:
+      # Use a single-node cluster (no discovery needed)
+      - "discovery.type=single-node"
+      # Disable security (username/password) for local development
+      - "xpack.security.enabled=false"
+      # Allocate 512MB of RAM. Adjust if needed.
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ports:
+      # Port for the REST API (used by Node.js and Postman)
+      - "9200:9200"
+      # Port for internal cluster communication
+      - "9300:9300"
+    volumes:
+      # Persists data in a Docker volume so your emails aren't lost on restart
+      - elastic_data:/usr/share/elasticsearch/data
+
+volumes:
+  elastic_data:

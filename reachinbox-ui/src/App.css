@@ -1,0 +1,241 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  --border-color: #333;
+  --bg-color: #1a1a1a;
+  --bg-color-light: #242424;
+  --bg-color-selected: #3a8ac7;
+  --text-color-primary: rgba(255, 255, 255, 0.9);
+  --text-color-secondary: rgba(255, 255, 255, 0.6);
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg-color);
+  color: var(--text-color-primary);
+  overflow: hidden;
+}
+
+.App {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+/* --- Sidebar --- */
+.sidebar {
+  width: 240px;
+  flex-shrink: 0;
+  background: var(--bg-color-light);
+  border-right: 1px solid var(--border-color);
+  padding: 1rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.sidebar h3 {
+  margin: 0;
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-color);
+  color: var(--text-color-primary);
+  font-size: 0.9rem;
+}
+
+.account-filter h4 {
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+  color: var(--text-color-secondary);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.account-filter ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.account-filter li {
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s ease;
+}
+
+.account-filter li:hover {
+  background-color: var(--border-color);
+}
+
+.account-filter li.selected {
+  background-color: var(--bg-color-selected);
+  color: white;
+  font-weight: 500;
+}
+
+/* --- Email List --- */
+.email-list {
+  width: 350px;
+  flex-shrink: 0;
+  border-right: 1px solid var(--border-color);
+  overflow-y: auto;
+  height: 100vh;
+}
+
+.email-item {
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.email-item:hover {
+  background: var(--bg-color-light);
+}
+
+.email-item.selected {
+  background: var(--bg-color-selected);
+}
+.email-item.selected .email-item-header .from,
+.email-item.selected .email-item-header .date,
+.email-item.selected .subject,
+.email-item.selected .snippet {
+  color: white;
+}
+
+.email-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.email-item-header .from {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--text-color-primary);
+}
+
+.email-item-header .date {
+  font-size: 0.75rem;
+  color: var(--text-color-secondary);
+}
+
+.subject {
+  font-size: 0.85rem;
+  color: var(--text-color-secondary);
+  margin: 4px 0;
+  font-weight: 500;
+}
+
+.snippet {
+  font-size: 0.8rem;
+  color: var(--text-color-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 8px;
+}
+
+.category-badge {
+  font-size: 0.7rem;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: #555;
+  color: white;
+  display: inline-block;
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+.category-badge.Interested { background-color: #36a64f; }
+.category-badge.Not-Interested { background-color: #c74a4a; }
+.category-badge.Meeting-Booked { background-color: #3a8ac7; }
+.category-badge.Spam { background-color: #b58e38; }
+.category-badge.Out-of-Office { background-color: #8c42a8; }
+.category-badge.General { background-color: #555; }
+
+
+/* --- Email View --- */
+.email-view {
+  flex: 1;
+  padding: 1.5rem;
+  overflow-y: auto;
+  height: 100vh;
+  box-sizing: border-box;
+}
+
+.email-view-header {
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+}
+
+.email-view-header h3 {
+  margin: 0 0 0.5rem 0;
+}
+
+.email-view-controls {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+.suggest-reply-btn {
+  background-color: #4a4a4a;
+  border: 1px solid #666;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.suggest-reply-btn:hover {
+  background-color: #5a5a5a;
+}
+.suggest-reply-btn:disabled {
+  background-color: #333;
+  color: #777;
+  cursor: not-allowed;
+}
+
+.suggestion-box {
+  width: 100%;
+  min-height: 120px;
+  background-color: #2b2b2b;
+  color: white;
+  padding: 10px;
+  border: 1px solid #555;
+  border-radius: 6px;
+  box-sizing: border-box;
+  font-family: inherit;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.email-iframe {
+  width: 100%;
+  border: 1px solid var(--border-color);
+  background: #fff;
+  border-radius: 6px;
+}
